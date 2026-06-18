@@ -346,10 +346,6 @@ This project demonstrates practical experience with:
 
 # 👨‍💻 Author
 
-### Vieer Dubey
-
-**DevOps Engineer | GenAI Enthusiast | Cloud & Platform Engineering**
-
-Building scalable AI, Cloud, Kubernetes, and DevOps solutions.
+### Vieer Dwivedi
 
 ⭐ If you found this project useful, consider starring the repository.
