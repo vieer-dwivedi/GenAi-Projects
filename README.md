@@ -1,131 +1,355 @@
-# Swami Vivekananda RAG System
+# 🧠 Swami Vivekananda RAG System
 
-A Retrieval-Augmented Generation (RAG) application built using the *Complete Works of Swami Vivekananda*. This project demonstrates how to build a production-style RAG pipeline from document ingestion to question answering using semantic search and Large Language Models.
+> **Production-Style Retrieval-Augmented Generation (RAG) Pipeline** built on the complete works of Swami Vivekananda using Semantic Chunking, Vector Search, ChromaDB, and Hugging Face LLMs.
 
-## Dataset
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![RAG](https://img.shields.io/badge/GenAI-RAG-green)
+![ChromaDB](https://img.shields.io/badge/VectorDB-ChromaDB-orange)
+![Transformers](https://img.shields.io/badge/HuggingFace-Transformers-yellow)
+![License](https://img.shields.io/badge/License-MIT-brightgreen)
 
-Source PDF:
+---
+
+## 📚 Table of Contents
+
+* [Overview](#-overview)
+* [Dataset](#-dataset)
+* [Architecture](#-architecture)
+* [Features](#-features)
+* [Pipeline Flow](#-pipeline-flow)
+* [Semantic Chunking](#-semantic-chunking)
+* [Embeddings](#-embeddings)
+* [Vector Database](#-vector-database)
+* [RAG Workflow](#-rag-workflow)
+* [Sample Queries](#-sample-queries)
+* [Tech Stack](#-tech-stack)
+* [Project Structure](#-project-structure)
+* [Future Enhancements](#-future-enhancements)
+* [Learning Outcomes](#-learning-outcomes)
+
+---
+
+# 🚀 Overview
+
+This project demonstrates an end-to-end **Retrieval-Augmented Generation (RAG)** system built using the **Complete Works of Swami Vivekananda**.
+
+The system:
+
+✅ Extracts text from a large PDF corpus
+
+✅ Creates structured documents
+
+✅ Performs semantic chunking
+
+✅ Generates vector embeddings
+
+✅ Stores vectors in ChromaDB
+
+✅ Retrieves relevant context
+
+✅ Uses an LLM to answer questions grounded in the source material
+
+---
+
+# 📖 Dataset
+
+### Source
 
 https://www.vedanta-pitt.org/wp-content/uploads/2020/05/Complete_Works_of_Swami_Vivekananda_all_volumes.pdf
 
-The corpus contains lectures, discourses, interviews, letters, writings, and newspaper reports across multiple volumes.
+### Contents
+
+* Lectures
+* Discourses
+* Interviews
+* Newspaper Reports
+* Conversations
+* Letters
+* Essays
+* Poems
+* Historical Notes
 
 ---
 
-## Features
+# 🏗️ Architecture
 
-* PDF text extraction
-* Structured document processing
-* Semantic chunking using embeddings
-* Token-aware chunk sizing
-* Context overlap between chunks
-* Embedding generation with BGE
-* ChromaDB vector storage
-* Semantic similarity search
-* Metadata-aware retrieval
-* RAG pipeline with Hugging Face LLMs
-* Context-based question answering
-
----
-
-## Tech Stack
-
-* Python
-* Google Colab
-* Sentence Transformers
-* BAAI/bge-small-en-v1.5
-* ChromaDB
-* Hugging Face Transformers
-* PyTorch
+```text
+                    User Question
+                           │
+                           ▼
+                  Query Embedding
+                           │
+                           ▼
+                     ChromaDB
+                           │
+                   Top-K Retrieval
+                           │
+                           ▼
+                  Context Builder
+                           │
+                           ▼
+                    HuggingFace
+                         LLM
+                           │
+                           ▼
+                    Final Answer
+```
 
 ---
 
-## Pipeline
+# ✨ Features
+
+### 📄 Document Processing
+
+* PDF Download & Parsing
+* Structured Document Creation
+* Metadata Preservation
+* Page Tracking
+
+### ✂️ Advanced Chunking
+
+* Paragraph Chunking
+* Sentence Chunking
+* Semantic Chunking
+* Token-Aware Chunking
+* Context Overlap
+
+### 🔍 Retrieval
+
+* Semantic Similarity Search
+* Top-K Retrieval
+* Metadata Filtering
+* Context Reconstruction
+
+### 🤖 LLM Integration
+
+* Hugging Face Models
+* Context-Aware QA
+* Grounded Responses
+* Hallucination Reduction
+
+---
+
+# 🔄 Pipeline Flow
 
 ```text
 PDF
- ↓
+ │
+ ▼
 Text Extraction
- ↓
+ │
+ ▼
 Document Structuring
- ↓
+ │
+ ▼
 Semantic Chunking
- ↓
+ │
+ ▼
 Embedding Generation
- ↓
-ChromaDB
- ↓
+ │
+ ▼
+ChromaDB Storage
+ │
+ ▼
 Semantic Retrieval
- ↓
+ │
+ ▼
 Context Construction
- ↓
+ │
+ ▼
 LLM
- ↓
-Answer Generation
+ │
+ ▼
+Answer
 ```
 
 ---
 
-## Semantic Chunking
+# 🧩 Semantic Chunking
 
-Instead of fixed-size chunks, this project uses semantic similarity between paragraphs to create meaningful chunks.
+Unlike traditional fixed-size chunking, this project groups paragraphs based on **meaning**.
 
-Features:
+### Strategy
 
-* Similarity-based chunk boundaries
-* Maximum token limits
-* Context overlap
-* Retrieval-optimized chunk generation
+* Generate paragraph embeddings
+* Calculate cosine similarity
+* Merge related paragraphs
+* Split on topic changes
+* Respect token limits
+* Preserve context overlap
+
+### Benefits
+
+✅ Better retrieval quality
+
+✅ Reduced context fragmentation
+
+✅ Higher answer relevance
+
+✅ Production-ready approach
 
 ---
 
-## Embeddings
+# 🧠 Embeddings
 
-Model used:
+### Model
 
-```text
+```python
 BAAI/bge-small-en-v1.5
 ```
 
-Embeddings are normalized and stored in ChromaDB along with metadata including:
+### Why BGE?
 
-* Volume
-* Section
-* Subheading
-* Page Numbers
-
----
-
-## Example Questions
-
-* When did Swami Vivekananda first arrive in America?
-* What is Karma Yoga?
-* What did Swami Vivekananda teach about religion?
-* What are his views on education?
-* What was his experience in the West?
+* High retrieval performance
+* Fast inference
+* Strong semantic understanding
+* Lightweight deployment
 
 ---
 
-## Learning Outcomes
+# 🗄️ Vector Database
 
-This project demonstrates:
+### ChromaDB
 
-* Document chunking strategies
-* Semantic search
-* Vector databases
-* Embedding models
+Each chunk stores:
+
+| Field      | Description           |
+| ---------- | --------------------- |
+| ID         | Unique Chunk ID       |
+| Text       | Chunk Content         |
+| Volume     | Book Volume           |
+| Section    | Section Name          |
+| Subheading | Topic                 |
+| Pages      | Source Pages          |
+| Embedding  | Vector Representation |
+
+---
+
+# 🔎 RAG Workflow
+
+### Step 1
+
+User asks:
+
+```text
+When did Swami Vivekananda first arrive in America?
+```
+
+### Step 2
+
+Generate query embedding.
+
+### Step 3
+
+Search ChromaDB.
+
+### Step 4
+
+Retrieve top relevant chunks.
+
+### Step 5
+
+Build context.
+
+### Step 6
+
+Pass context to LLM.
+
+### Step 7
+
+Generate grounded answer.
+
+---
+
+# 💡 Sample Queries
+
+```text
+What is Karma Yoga?
+```
+
+```text
+What did Swami Vivekananda teach about religion?
+```
+
+```text
+What were his views on education?
+```
+
+```text
+When did Swami Vivekananda first visit America?
+```
+
+```text
+What was discussed at the Parliament of Religions?
+```
+
+---
+
+# ⚙️ Tech Stack
+
+| Category        | Technology             |
+| --------------- | ---------------------- |
+| Language        | Python                 |
+| Notebook        | Google Colab           |
+| Embeddings      | Sentence Transformers  |
+| Embedding Model | BAAI/bge-small-en-v1.5 |
+| Vector DB       | ChromaDB               |
+| LLM             | Hugging Face Models    |
+| Framework       | Transformers           |
+| Backend         | PyTorch                |
+
+---
+
+# 📂 Project Structure
+
+```bash
+.
+├── swamivivekanad.ipynb
+├── README.md
+├── data/
+│   └── Complete_Works_of_Swami_Vivekananda.pdf
+├── chunks/
+├── embeddings/
+└── chromadb/
+```
+
+---
+
+# 📈 Future Enhancements
+
+* [ ] Hybrid Search (BM25 + Vector Search)
+* [ ] Cross Encoder Reranking
+* [ ] Citation-Based Responses
+* [ ] Streamlit UI
+* [ ] LangChain Integration
+* [ ] Evaluation Metrics
+* [ ] Agentic RAG
+* [ ] Multi-Document Support
+
+---
+
+# 🎯 Learning Outcomes
+
+This project demonstrates practical experience with:
+
 * Retrieval-Augmented Generation (RAG)
-* LLM integration using Hugging Face
+* Semantic Search
+* Embedding Models
+* Vector Databases
+* Document Processing
+* Semantic Chunking
+* Context Engineering
+* LLM Integration
+* Production AI Pipelines
 
 ---
 
-## Future Improvements
+# 👨‍💻 Author
 
-* Hybrid Search (BM25 + Vector Search)
-* Cross Encoder Reranking
-* Streaming Responses
-* Citation-Based Answers
-* Evaluation Framework
-* Web Interface using Streamlit
+### Vieer Dubey
 
-DevOps Engineer | GenAI Enthusiast | RAG Systems
+**DevOps Engineer | GenAI Enthusiast | Cloud & Platform Engineering**
+
+Building scalable AI, Cloud, Kubernetes, and DevOps solutions.
+
+⭐ If you found this project useful, consider starring the repository.
