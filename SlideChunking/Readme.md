@@ -1,4 +1,28 @@
-# 📚 AWS RAG Pipeline from Scratch
+📚 AWS RAG Pipeline from Scratch
+🚀 Google Colab Notebook
+
+https://colab.research.google.com/github/vieer-dwivedi/production-rag-pipeline-vivekananda/blob/main/SlideChunking/SlideChunking.ipynb
+
+This project demonstrates the complete implementation of a Production-Style Retrieval Augmented Generation (RAG) Pipeline using PyMuPDF, Sliding Window Chunking, BGE Embeddings, FAISS, Cross-Encoder Reranking, Metadata-Aware Context Building, and Hugging Face LLMs.
+
+🛠 Skills Developed
+PDF Processing & Text Extraction
+Document Structuring
+Metadata Extraction
+Structural Chunking
+Sliding Window Chunking
+Token Validation
+BGE Embedding Generation
+Vector Databases (FAISS)
+Semantic Search & Retrieval
+Top-K Retrieval Strategies
+Cross-Encoder Reranking
+Metadata-Aware Context Building
+Prompt Engineering
+Hugging Face LLM Integration
+Retrieval-Augmented Generation (RAG)
+End-to-End Question Answering Systems
+
 
 ## 🚀 Pipeline Overview
 
